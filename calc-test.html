@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таблица с опциями</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .description {
+        display: none;
+        margin-top: 5px;
+        font-size: 0.9em;
+        color: #555;
+      }
+      /*/*/
+      .section-header {
+        font-weight: bold;
+        text-align: left;
+        background-color: #e0f0ff;
+      }
+      .highlight {
+        color: orange;
+        font-weight: bold;
+      }
+      .total-row {
+        background-color: #e0f0ff;
+        font-weight: bold;
+      }
+      .disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+  </style>
+    </style>
+  </head>
+  <body>
+    <table id="settingsTable">
+      <thead>
+        <tr>
+          <th>Количество пользователей</th>
+          <th>Наименование опции</th>
+          <th>Подписка на 1 пользователь/мес</th>
+          <th>Абонентская плата / мес</th>
+          <th>Разовый платеж за подключение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">регистрация аккаунта на платформе</button>
+            <div class="description">Доступ к просмотру, редактированию и остальному функционалу в зависимости от выбранных подключений и коннекторов и синхронизаций</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription1"/>
+            <label for="subscription1"><span class="price">1260</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee1"/>
+            <label for="monthlyFee1"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee1"/>
+            <label for="oneTimeFee1"><span class="price">-</span></label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Подключение электронной почты</button>
+            <div class="description">Общее количесвто клиентов; Количесвто новых потенциальных клиентов; Количесвто клиентов с запланированной задачей; Клиенты без назначенных задач; Клиенты отправленные на согласование - в отказ (с учетом количества касаний); Клиенты с просроченными задачами; Контактные данные, которые остались не привязаннымы к клиентам; Количесвто запланированных задач (у одного клиента может быть несколько задач); Количесвто выполненных задач; Количесвто просроченных задач; Количесвто клиентов с продолжительными переговорами; Количесвто продолжительных переговоров (у одного клиента может быть несколько продолжительных переговоров); Среднее время переговоров в день.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription2"/>
+            <label for="subscription2"><span class="price">140</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee2"/>
+            <label for="monthlyFee2"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee2"/>
+            <label for="oneTimeFee2"><span class="price">2700</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Подключение телефонии</button>
+            <div class="description">Общее количесвто клиентов; Количесвто новых потенциальных клиентов; Количесвто клиентов с запланированной задачей; Клиенты без назначенных задач; Клиенты отправленные на согласование - в отказ (с учетом количества касаний); Клиенты с просроченными задачами; Контактные данные, которые остались не привязаннымы к клиентам; Количесвто запланированных задач (у одного клиента может быть несколько задач); Количесвто выполненных задач; Количесвто просроченных задач; Количесвто клиентов с продолжительными переговорами; Количесвто продолжительных переговоров (у одного клиента может быть несколько продолжительных переговоров); Среднее время переговоров в день.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription3"/>
+            <label for="subscription3"><span class="price">700</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee3"/>
+            <label for="monthlyFee3"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee3"/>
+            <label for="oneTimeFee3"><span class="price">5000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Подключение sim/esim карты</button>
+            <div class="description">Общее количесвто клиентов; Количесвто новых потенциальных клиентов; Количесвто клиентов с запланированной задачей; Клиенты без назначенных задач; Клиенты отправленные на согласование - в отказ (с учетом количества касаний); Клиенты с просроченными задачами; Контактные данные, которые остались не привязаннымы к клиентам; Количесвто запланированных задач (у одного клиента может быть несколько задач); Количесвто выполненных задач; Количесвто просроченных задач; Количесвто клиентов с продолжительными переговорами; Количесвто продолжительных переговоров (у одного клиента может быть несколько продолжительных переговоров); Среднее время переговоров в день.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription4"/>
+            <label for="subscription4"><span class="price">2100</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee4"/>
+            <label for="monthlyFee4"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee4"/>
+            <label for="oneTimeFee4"><span class="price">5000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Подключение вотсап</button>
+            <div class="description">Общее количесвто клиентов; Количесвто новых потенциальных клиентов; Количесвто клиентов с запланированной задачей; Клиенты без назначенных задач; Клиенты отправленные на согласование - в отказ (с учетом количества касаний); Клиенты с просроченными задачами; Контактные данные, которые остались не привязаннымы к клиентам; Количесвто запланированных задач (у одного клиента может быть несколько задач); Количесвто выполненных задач; Количесвто просроченных задач; Количесвто клиентов с продолжительными переговорами; Количесвто продолжительных переговоров (у одного клиента может быть несколько продолжительных переговоров); Среднее время переговоров в день.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription5"/>
+            <label for="subscription5"><span class="price">3780</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee5"/>
+            <label for="monthlyFee5"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee5"/>
+            <label for="oneTimeFee5"><span class="price">15000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Подключение телеграмм</button>
+            <div class="description">Общее количесвто клиентов; Количесвто новых потенциальных клиентов; Количесвто клиентов с запланированной задачей; Клиенты без назначенных задач; Клиенты отправленные на согласование - в отказ (с учетом количества касаний); Клиенты с просроченными задачами; Контактные данные, которые остались не привязаннымы к клиентам; Количесвто запланированных задач (у одного клиента может быть несколько задач); Количесвто выполненных задач; Количесвто просроченных задач; Количесвто клиентов с продолжительными переговорами; Количесвто продолжительных переговоров (у одного клиента может быть несколько продолжительных переговоров); Среднее время переговоров в день.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription6"/>
+            <label for="subscription6"><span class="price">3780</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee6"/>
+            <label for="monthlyFee6"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee6"/>
+            <label for="oneTimeFee6"><span class="price">15000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>
+            <button onclick="toggleDescription(this)">Коннектор истории переписки электронной почты</button>
+            <div class="description">инструмент, позволяющий пользователям сохранять, отслеживать и управлять историей своих электронных писем, где важно поддерживать полное и организованное досье на клиента.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription7"/>
+            <label for="subscription7"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee7"/>
+            <label for="monthlyFee7"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee7"/>
+            <label for="oneTimeFee7"><span class="price">7000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>
+            <button onclick="toggleDescription(this)">Коннектор истории переписки в мессенджерах</button>
+            <div class="description">-</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription8"/>
+            <label for="subscription8"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee8"/>
+            <label for="monthlyFee8"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee8"/>
+            <label for="oneTimeFee8"><span class="price">7000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>
+            <button onclick="toggleDescription(this)">Коннектор истории переговоров</button>
+            <div class="description">автоматическая загрузка данных о предыдущих взаимодействиях. Обеспечивает более эффективное управление деловыми отношениями, облегчает анализ прошлых взаимодействий для принятия решений в будущих переговорах.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription9"/>
+            <label for="subscription9"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee9"/>
+            <label for="monthlyFee9"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee9"/>
+            <label for="oneTimeFee9"><span class="price">7000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>
+            <button onclick="toggleDescription(this)">Агрегирование баз данных для импорта</button>
+            <div class="description">объединения данных из различных источников, систем или форматов для их  использования и загрузки в систему</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription10"/>
+            <label for="subscription10"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee10"/>
+            <label for="monthlyFee10"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee10"/>
+            <label for="oneTimeFee10"><span class="price">2000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Коннектор для искуственного интеллекта</button>
+            <div class="description">Переводит аудио переговров в текст; Оценка переговоров на соответсвие блокам скрипта; Автозаполнение возражений и потребностей озвученных клиентом в ходе переговоров</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription11"/>
+            <label for="subscription11"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee11"/>
+            <label for="monthlyFee11"><span class="price">98000</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee11"/>
+            <label for="oneTimeFee11"><span class="price">30000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>
+            <button onclick="toggleDescription(this)">Генератор идей для отработки возражений клиентов, поставщиков</button>
+            <div class="description">Идеи помогающие более эффективно отрабатывать возражения клиентов.</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription12"/>
+            <label for="subscription12"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee12"/>
+            <label for="monthlyFee12"><span class="price">63000</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee12"/>
+            <label for="oneTimeFee12"><span class="price">96000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">1С синхронизация</button>
+            <div class="description">Этапы воронки продаж из базы 1С; Номенклатура товаров; Оплаты; Отгрузки; Квадрант эффективности отдела продаж; Цикл сделки; Сквозная сегментация клиентов по товару; Зависшие сделки на этапе "договор есть, оплат нет"; Зависшие сделки на этапе "переговоры ведутся договор не оформляется"; Анализ 9 групп покупателей</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription13"/>
+            <label for="subscription13"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee13"/>
+            <label for="monthlyFee13"><span class="price">21000</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee13"/>
+            <label for="oneTimeFee13"><span class="price">17000</span> руб.</label>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="number" min="0" class="user-count" placeholder="Введите число" /></td>
+          <td>
+            <button onclick="toggleDescription(this)">Хостинг данных (Гб)</button>
+            <div class="description">-</div>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="subscription14"/>
+            <label for="subscription14"><span class="price">-</span></label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="monthlyFee14"/>
+            <label for="monthlyFee14"><span class="price">21000</span> руб.</label>
+          </td>
+          <td>
+            <input type="checkbox" class="option-checkbox" id="oneTimeFee14"/>
+            <label for="oneTimeFee14"><span class="price">15000</span> руб.</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th rowspan="2" class="section-header">СТОИМОСТЬ</th>
+          <th colspan="3">Период оплаты</th>
+        </tr>
+        <tr>
+          <th>при оплате за 1 месяц</th>
+          <th>при оплате за 6 месяцев (скидка 14.2%)</th>
+          <th>при оплате за 12 месяцев (скидка 28.5%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Подписка на пользователя</td>
+          <td class="monthly-cost">0.00</td>
+          <td class="semi-annual-cost">0.00</td>
+          <td class="annual-cost">0.00</td>
+        </tr>
+        <tr>
+          <td>Абонентская плата</td>
+          <td class="monthly-cost">0.00</td>
+          <td class="semi-annual-cost">0.00</td>
+          <td class="annual-cost">0.00</td>
+        </tr>
+        <tr>
+          <td class="highlight">Разовый платеж за подключение</td>
+          <td class="one-time-cost">0.00</td>
+          <td class="one-time-cost">0.00</td>
+          <td class="one-time-cost">0.00</td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>Итого к оплате</strong></td>
+          <td class="total-cost">0.00</td>
+          <td class="total-cost">0.00</td>
+          <td class="total-cost">0.00</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      // Функция для показа/скрытия описания опции
+      function toggleDescription(button) {
+        const description = button.nextElementSibling;
+        description.style.display =
+          description.style.display === "none" ? "block" : "none";
+      }
+
+      document.querySelectorAll('td').forEach(td => {
+        const checkbox = td.querySelector('input[type="checkbox"]');
+        const priceSpan = td.querySelector('span.price');
+        
+        if (checkbox && priceSpan && priceSpan.textContent.trim() === '-') {
+          td.classList.add('disabled');
+        }
+      });
+
+      const userCounts = document.querySelectorAll(".user-count");
+      const checkboxes = document.querySelectorAll(".option-checkbox");
+
+      // Функция для пересчета итогов
+      function calculateTotal() {
+        // Обнуление переменных для сумм
+        let subscriptionMonthly = 0;
+        let subscriptionSemiAnnual = 0;
+        let subscriptionAnnual = 0;
+
+        let monthlyFeeMonthly = 0;
+        let monthlyFeeSemiAnnual = 0;
+        let monthlyFeeAnnual = 0;
+
+        let oneTimeTotal = 0;
+
+        checkboxes.forEach((checkbox) => {
+          const td = checkbox.closest("td");
+          const price = parseFloat(td.querySelector(".price").textContent) || 0;
+          const row = td.closest("tr");
+          const userCountInput = row.querySelector(".user-count");
+          const userCount = userCountInput
+            ? parseInt(userCountInput.value) || 0
+            : 1; // Если инпута нет, берем 1
+
+          if (checkbox.checked) {
+            const cost = userCount * price;
+
+            // Определяем столбец и добавляем стоимость к нужной категории
+            switch (td.cellIndex) {
+              case 2: // Подписка
+                subscriptionMonthly += cost;
+                subscriptionSemiAnnual += cost * 6 * 0.858; // скидка 14.2%
+                subscriptionAnnual += cost * 12 * 0.715; // скидка 28.5%
+                break;
+              case 3: // Абонентская плата
+                monthlyFeeMonthly += cost;
+                monthlyFeeSemiAnnual += cost * 6 * 0.858;
+                monthlyFeeAnnual += cost * 12 * 0.715;
+                break;
+              case 4: // Разовый платеж за подключение
+                oneTimeTotal += cost;
+                break;
+            }
+          }
+        });
+
+        // Обновление ячеек с расчетами для "Подписка на пользователя"
+        document.querySelectorAll(".monthly-cost")[0].textContent =
+          subscriptionMonthly.toFixed(2);
+        document.querySelectorAll(".semi-annual-cost")[0].textContent =
+          subscriptionSemiAnnual.toFixed(2);
+        document.querySelectorAll(".annual-cost")[0].textContent =
+          subscriptionAnnual.toFixed(2);
+
+        // Обновление ячеек с расчетами для "Абонентская плата"
+        document.querySelectorAll(".monthly-cost")[1].textContent =
+          monthlyFeeMonthly.toFixed(2);
+        document.querySelectorAll(".semi-annual-cost")[1].textContent =
+          monthlyFeeSemiAnnual.toFixed(2);
+        document.querySelectorAll(".annual-cost")[1].textContent =
+          monthlyFeeAnnual.toFixed(2);
+
+        // Обновление ячеек с расчетами для "Разовый платеж за подключение"
+        document
+          .querySelectorAll(".one-time-cost")
+          .forEach((cell) => (cell.textContent = oneTimeTotal.toFixed(2)));
+
+        // Обновление итоговой строки
+        document.querySelectorAll(".total-cost")[0].textContent = (
+          subscriptionMonthly +
+          monthlyFeeMonthly +
+          oneTimeTotal
+        ).toFixed(2);
+        document.querySelectorAll(".total-cost")[1].textContent = (
+          subscriptionSemiAnnual +
+          monthlyFeeSemiAnnual +
+          oneTimeTotal
+        ).toFixed(2);
+        document.querySelectorAll(".total-cost")[2].textContent = (
+          subscriptionAnnual +
+          monthlyFeeAnnual +
+          oneTimeTotal
+        ).toFixed(2);
+      }
+
+      // Слушатели событий для всех чекбоксов и инпутов
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", calculateTotal);
+      });
+
+      userCounts.forEach((input) => {
+        input.addEventListener("input", calculateTotal);
+      });
+
+      // Инициализация на загрузке страницы
+      calculateTotal();
+    </script>
+  </body>
+</html>
